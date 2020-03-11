@@ -56,12 +56,12 @@ class NavbarComponent extends Component {
                 </a>
               </li>
               <li class='nav-item'>
-                <a href='login.html' class='nav-link'>
+                <a href='javascript:void(0)' class='nav-link'>
                   <span class='nav-link-inner--text'>Login</span>
                 </a>
               </li>
               <li class='nav-item'>
-                <a href='register.html' class='nav-link'>
+                <a href='javascript:void(0)' class='nav-link'>
                   <span class='nav-link-inner--text'>Register</span>
                 </a>
               </li>
