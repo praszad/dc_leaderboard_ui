@@ -2,27 +2,12 @@ import React, { Component } from 'react';
 import NavbarComponent from '../NavBar/NavbarComponent';
 import { AuthLogin } from '../../utility/actions';
 import toastr from '../../utility/Toaster';
-class LoginComponent extends Component {
+import { Link } from 'react-router-dom';
+class NotFoundComponent extends Component {
   constructor(props) {
     super(props);
   }
-  handleFieldChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-  handleFormSubmit = async e => {
-    e.stopPropagation();
-    const { user_id, password } = this.state;
-    const data = { user_id, password };
 
-    if (!data.user_id || !data.password) {
-      toastr.error('PLease Fill All the Fields');
-      return;
-    }
-    let canLogin = await AuthLogin(data);
-    if (canLogin) {
-      this.props.history.push('dashboard');
-    }
-  };
   render() {
     return (
       <React.Fragment>
@@ -51,52 +36,20 @@ class LoginComponent extends Component {
                 <div className='card bg-secondary border-0 mb-0'>
                   <div className='card-body px-lg-5 py-lg-5'>
                     <form role='form'>
-                      <div className='form-group mb-3'>
-                        <div className='input-group input-group-merge input-group-alternative'>
-                          <div className='input-group-prepend'>
-                            <span className='input-group-text'>
-                              <i className='ni ni-email-83' />
-                            </span>
-                          </div>
-                          <input
-                            className='form-control'
-                            placeholder='Emp Id'
-                            type='text'
-                            name='user_id'
-                            onChange={e => {
-                              this.handleFieldChange(e);
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <div className='form-group'>
-                        <div className='input-group input-group-merge input-group-alternative'>
-                          <div className='input-group-prepend'>
-                            <span className='input-group-text'>
-                              <i className='ni ni-lock-circle-open'></i>
-                            </span>
-                          </div>
-                          <input
-                            className='form-control'
-                            placeholder='Password'
-                            type='password'
-                            name='password'
-                            onChange={e => {
-                              this.handleFieldChange(e);
-                            }}
-                          />
-                        </div>
+                      <div className='text-center'>
+                        <button type='button' className='btn btn-primary my-4'>
+                          Component Not Found
+                        </button>
                       </div>
                       <div className='text-center'>
-                        <button
-                          type='button'
-                          onClick={e => {
-                            this.handleFormSubmit(e);
-                          }}
-                          className='btn btn-primary my-4'
-                        >
-                          Sign in
-                        </button>
+                        <Link to='/dashboard'>
+                          <button
+                            type='button'
+                            className='btn btn-primary my-4'
+                          >
+                            Take Me To Dashboard
+                          </button>
+                        </Link>
                       </div>
                     </form>
                   </div>
@@ -180,4 +133,4 @@ class LoginComponent extends Component {
   }
 }
 
-export default LoginComponent;
+export default NotFoundComponent;
