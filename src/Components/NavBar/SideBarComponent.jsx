@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 
 class SideBarComponent extends Component {
+  constructor(props) {
+    super(props);
+  }
+  redirectPage = page => {
+    this.props.history.push(page);
+  };
   render() {
     return (
       <React.Fragment>
@@ -10,7 +16,13 @@ class SideBarComponent extends Component {
         >
           <div class='scrollbar-inner'>
             <div class='sidenav-header  align-items-center'>
-              <a class='navbar-brand' href='javascript:void(0)'>
+              <a
+                class='navbar-brand'
+                onClick={() => {
+                  this.redirectPage('/');
+                }}
+                href='javascript:void(0)'
+              >
                 <img
                   src='../assets/img/brand/blue.png'
                   class='navbar-brand-img'
@@ -22,7 +34,13 @@ class SideBarComponent extends Component {
               <div class='collapse navbar-collapse' id='sidenav-collapse-main'>
                 <ul class='navbar-nav'>
                   <li class='nav-item'>
-                    <a class='nav-link active' href='dashboard.html'>
+                    <a
+                      class='nav-link active'
+                      onClick={() => {
+                        this.redirectPage('/');
+                      }}
+                      href='javascript:void(0)'
+                    >
                       <i class='ni ni-tv-2 text-primary'></i>
                       <span class='nav-link-text'>Dashboard</span>
                     </a>
@@ -40,15 +58,27 @@ class SideBarComponent extends Component {
                     </a>
                   </li>
                   <li class='nav-item'>
-                    <a class='nav-link' href='profile.html'>
+                    <a
+                      class='nav-link'
+                      onClick={() => {
+                        this.redirectPage('/profile');
+                      }}
+                      href='javascript:void(0)'
+                    >
                       <i class='ni ni-single-02 text-yellow'></i>
                       <span class='nav-link-text'>Profile</span>
                     </a>
                   </li>
                   <li class='nav-item'>
-                    <a class='nav-link' href='tables.html'>
+                    <a
+                      class='nav-link'
+                      href='javascript:void(0)'
+                      onClick={() => {
+                        this.redirectPage('/employees');
+                      }}
+                    >
                       <i class='ni ni-bullet-list-67 text-default'></i>
-                      <span class='nav-link-text'>Tables</span>
+                      <span class='nav-link-text'>Employees</span>
                     </a>
                   </li>
                   <li class='nav-item'>
