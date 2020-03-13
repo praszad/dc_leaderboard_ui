@@ -14,6 +14,7 @@ function App() {
   Authorization();
   return (
     <Router history={history}>
+
       <Switch>
         <PublicRouter path='/' exact Component={LoginComponent} />
         <PublicRouter path='/login' Component={LoginComponent} />
