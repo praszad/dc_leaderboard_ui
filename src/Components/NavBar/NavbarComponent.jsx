@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class NavbarComponent extends Component {
   render() {
@@ -8,9 +9,11 @@ class NavbarComponent extends Component {
         className='navbar navbar-horizontal navbar-transparent navbar-main navbar-expand-lg navbar-light'
       >
         <div className='container'>
-          <a className='navbar-brand' href='javascript:void(0)'>
-            <img src='../assets/img/brand/white.png' />
-          </a>
+          <Link to='/dashboard'>
+            <a className='navbar-brand' href='javascript:void(0)'>
+              <img src='../assets/img/brand/white.png' />
+            </a>
+          </Link>
           <button
             className='navbar-toggler'
             type='button'
