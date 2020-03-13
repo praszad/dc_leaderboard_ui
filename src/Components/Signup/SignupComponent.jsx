@@ -4,6 +4,8 @@ import { addNewEmployee } from '../../utility/actions';
 import toastr from '../../utility/Toaster';
 import LoginFooter from '../NavBar/LoginFooter';
 import history from '../../utility/history';
+import SideBarComponent from '../NavBar/SideBarComponent';
+import DashBoardNavBar from '../NavBar/DashBoardNavBar';
 class SignupComponent extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +16,7 @@ class SignupComponent extends Component {
   };
   handleFormSubmit = async e => {
     e.stopPropagation();
-    const { password, password1, emp_name, user_id } = this.state;
+    const { emp_name, user_id } = this.state;
     const userObject = { ...this.state };
 
     if (!emp_name || !user_id) {
@@ -37,123 +39,134 @@ class SignupComponent extends Component {
   render() {
     return (
       <React.Fragment>
-        <NavbarComponent />
-        <div className='main-content'>
-          <div className='header bg-gradient-primary py-7 py-lg-8 pt-lg-9'>
-            <div className='separator separator-bottom separator-skew zindex-100'>
-              <svg
-                x='0'
-                y='0'
-                viewBox='0 0 2560 100'
-                preserveAspectRatio='none'
-                version='1.1'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <polygon
-                  className='fill-default'
-                  points='2560 0 2560 100 0 100'
-                ></polygon>
-              </svg>
-            </div>
+        <SideBarComponent history={this.props.history} />
+        <div class='main-content' id='panel'>
+          <DashBoardNavBar />
+          <div class='header pb-6 d-flex align-items-center'>
+            <span class='mask bg-gradient-default opacity-10'></span>
           </div>
-          <div className='container mt--8 pb-5'>
-            <div className='row justify-content-center'>
-              <div className='col-lg-5 col-md-7'>
-                <div className='card bg-secondary border-0 mb-0'>
-                  <div className='card-body px-lg-5 py-lg-5'>
-                    <form role='form'>
-                      <div className='form-group mb-3'>
-                        <div className='input-group input-group-merge input-group-alternative'>
-                          <div className='input-group-prepend'>
-                            <span className='input-group-text'>
-                              <i className='ni ni-user-83' />
-                            </span>
-                          </div>
-                          <input
-                            className='form-control'
-                            placeholder='Emp Name'
-                            type='text'
-                            name='emp_name'
-                            onChange={e => {
-                              this.handleFieldChange(e);
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <div className='form-group mb-3'>
-                        <div className='input-group input-group-merge input-group-alternative'>
-                          <div className='input-group-prepend'>
-                            <span className='input-group-text'>
-                              <i className='ni ni-user-83' />
-                            </span>
-                          </div>
-                          <input
-                            className='form-control'
-                            placeholder='Emp Id'
-                            type='text'
-                            name='user_id'
-                            onChange={e => {
-                              this.handleFieldChange(e);
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <div className='form-group mb-3'>
-                        <div className='input-group input-group-merge input-group-alternative'>
-                          <div className='input-group-prepend'>
-                            <span className='input-group-text'>
-                              <i className='ni ni-user-83' />
-                            </span>
-                          </div>
-                          <input
-                            className='form-control'
-                            placeholder='Mobile Number'
-                            type='text'
-                            name='mobile'
-                            onChange={e => {
-                              this.handleFieldChange(e);
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <div className='form-group mb-3'>
-                        <div className='input-group input-group-merge input-group-alternative'>
-                          <div className='input-group-prepend'>
-                            <span className='input-group-text'>
-                              <i className='ni ni-user-83' />
-                            </span>
-                          </div>
-                          <input
-                            className='form-control'
-                            placeholder='Date Of Joining'
-                            type='date'
-                            name='date_of_joining'
-                            onChange={e => {
-                              this.handleFieldChange(e);
-                            }}
-                          />
-                        </div>
-                      </div>
+          <div class='container-fluid mt--6'>
+            <div class='row'>
+              <div class='col-xl-8 order-xl-1'>
+                <div class='card'>
+                  <div class='card-body'>
+                    <form>
+                      <h6 class='heading-small text-muted mb-4'>Create User</h6>
+                      <hr class='my-4' />
 
-                      <div className='text-center'>
-                        <button
-                          type='button'
-                          onClick={e => {
-                            this.handleFormSubmit(e);
-                          }}
-                          className='btn btn-primary my-4'
-                        >
-                          Add User
-                        </button>
+                      <div class='pl-lg-4'>
+                        <div class='row'>
+                          <div class='col-md-12'>
+                            <div class='form-group'>
+                              <label
+                                class='form-control-label'
+                                for='input-address'
+                              >
+                                Employee Name *
+                              </label>
+                              <input
+                                id='input-address'
+                                name='emp_name'
+                                onChange={e => {
+                                  this.handleFieldChange(e);
+                                }}
+                                class='form-control'
+                                placeholder='Employee Name'
+                                type='text'
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class='row'>
+                          <div class='col-md-12'>
+                            <div class='form-group'>
+                              <label
+                                class='form-control-label'
+                                for='input-address'
+                              >
+                                Employee Id *
+                              </label>
+                              <input
+                                id='input-address'
+                                name='user_id'
+                                onChange={e => {
+                                  this.handleFieldChange(e);
+                                }}
+                                class='form-control'
+                                placeholder='User Id'
+                                type='text'
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class='row'>
+                          <div class='col-md-12'>
+                            <div class='form-group'>
+                              <label
+                                class='form-control-label'
+                                for='input-address'
+                              >
+                                Mobile Number *
+                              </label>
+                              <input
+                                id='input-address'
+                                name='mobile'
+                                onChange={e => {
+                                  this.handleFieldChange(e);
+                                }}
+                                class='form-control'
+                                placeholder='Mobile Number'
+                                type='number'
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div class='row'>
+                          <div class='col-md-12'>
+                            <div class='form-group'>
+                              <label
+                                class='form-control-label'
+                                for='input-address'
+                              >
+                                Employee Name *
+                              </label>
+                              <input
+                                id='input-address'
+                                placeholder='Date Of Joining'
+                                type='date'
+                                class='form-control'
+                                name='date_of_joining'
+                                onChange={e => {
+                                  this.handleFieldChange(e);
+                                }}
+                              />
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </form>
+                    <div class='card-header'>
+                      <div class='row align-items-center'>
+                        <div class='col-8'></div>
+                        <div class='col-4 text-right'>
+                          <a
+                            href='javascript:void(0)'
+                            onClick={e => {
+                              this.handleFormSubmit(e);
+                            }}
+                            class='btn btn-sm btn-primary'
+                          >
+                            Create User
+                          </a>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <LoginFooter />
       </React.Fragment>
     );
   }
