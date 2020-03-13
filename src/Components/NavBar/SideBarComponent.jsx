@@ -70,6 +70,34 @@ class SideBarComponent extends Component {
                       </a>
                     </li>
                   ) : null}
+                  {role_id == 36 ? (
+                    <li class='nav-item'>
+                      <a
+                        class='nav-link'
+                        href='javascript:void(0)'
+                        onClick={() => {
+                          this.redirectPage('/category');
+                        }}
+                      >
+                        <i class='ni ni-circle-08 text-pink'></i>
+                        <span class='nav-link-text'>Create Category</span>
+                      </a>
+                    </li>
+                  ) : null}
+                  {role_id == 36 ? (
+                    <li class='nav-item'>
+                      <a
+                        class='nav-link'
+                        href='javascript:void(0)'
+                        onClick={() => {
+                          this.redirectPage('/categoryitem');
+                        }}
+                      >
+                        <i class='ni ni-circle-08 text-pink'></i>
+                        <span class='nav-link-text'>Create Category Item</span>
+                      </a>
+                    </li>
+                  ) : null}
                   <li class='nav-item'>
                     <a
                       class='nav-link'
