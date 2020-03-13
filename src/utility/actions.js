@@ -43,12 +43,26 @@ export const AuthLogin = ({ user_id, password }) => {
   return requestLoginCall(reqObject);
 };
 
-export const getEmployees = async () => {
+export const getEmployees = async ({ user_id = '', page = 1 }) => {
   const token = getToken();
   let reqObject = {
-    method: 'get',
+    method: 'post',
     url: 'http://localhost:3636/api/v1/employee',
-    headers: { Authorization: token }
+    headers: { Authorization: token },
+    data: { user_id, page }
+  };
+  return await requestCall(reqObject);
+};
+
+export const addNewEmployee = async ({ ...userObject }) => {
+  console.log({ ...userObject });
+
+  const token = getToken();
+  let reqObject = {
+    method: 'post',
+    url: 'http://localhost:3636/api/v1/employee/add',
+    headers: { Authorization: token },
+    data: { ...userObject, role_id: 'User' }
   };
   return await requestCall(reqObject);
 };

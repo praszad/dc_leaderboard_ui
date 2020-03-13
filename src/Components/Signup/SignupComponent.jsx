@@ -1,26 +1,37 @@
 import React, { Component } from 'react';
 import NavbarComponent from '../NavBar/NavbarComponent';
-import { AuthLogin } from '../../utility/actions';
+import { addNewEmployee } from '../../utility/actions';
 import toastr from '../../utility/Toaster';
-class LoginComponent extends Component {
+import LoginFooter from '../NavBar/LoginFooter';
+import history from '../../utility/history';
+class SignupComponent extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
   handleFieldChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
   handleFormSubmit = async e => {
     e.stopPropagation();
-    const { user_id, password } = this.state;
-    const data = { user_id, password };
+    const { password, password1, emp_name, user_id } = this.state;
+    const userObject = { ...this.state };
 
-    if (!data.user_id || !data.password) {
-      toastr.error('PLease Fill All the Fields');
+    if (!emp_name || !user_id) {
+      toastr.error('Please Fill All the Fields');
       return;
     }
-    let canLogin = await AuthLogin(data);
-    if (canLogin) {
-      this.props.history.push('dashboard');
+    console.log(userObject);
+
+    let responseObject = await addNewEmployee(userObject);
+    console.log(responseObject);
+    const { data, status } = responseObject;
+
+    if (user_id === data?.emp_id && status === 200) {
+      toastr.success('User Created Successfully');
+      history.push('/');
+    } else {
+      toastr.error(data);
     }
   };
   render() {
@@ -55,7 +66,25 @@ class LoginComponent extends Component {
                         <div className='input-group input-group-merge input-group-alternative'>
                           <div className='input-group-prepend'>
                             <span className='input-group-text'>
-                              <i className='ni ni-email-83' />
+                              <i className='ni ni-user-83' />
+                            </span>
+                          </div>
+                          <input
+                            className='form-control'
+                            placeholder='Emp Name'
+                            type='text'
+                            name='emp_name'
+                            onChange={e => {
+                              this.handleFieldChange(e);
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <div className='form-group mb-3'>
+                        <div className='input-group input-group-merge input-group-alternative'>
+                          <div className='input-group-prepend'>
+                            <span className='input-group-text'>
+                              <i className='ni ni-user-83' />
                             </span>
                           </div>
                           <input
@@ -69,24 +98,43 @@ class LoginComponent extends Component {
                           />
                         </div>
                       </div>
-                      <div className='form-group'>
+                      <div className='form-group mb-3'>
                         <div className='input-group input-group-merge input-group-alternative'>
                           <div className='input-group-prepend'>
                             <span className='input-group-text'>
-                              <i className='ni ni-lock-circle-open'></i>
+                              <i className='ni ni-user-83' />
                             </span>
                           </div>
                           <input
                             className='form-control'
-                            placeholder='Password'
-                            type='password'
-                            name='password'
+                            placeholder='Mobile Number'
+                            type='text'
+                            name='mobile'
                             onChange={e => {
                               this.handleFieldChange(e);
                             }}
                           />
                         </div>
                       </div>
+                      <div className='form-group mb-3'>
+                        <div className='input-group input-group-merge input-group-alternative'>
+                          <div className='input-group-prepend'>
+                            <span className='input-group-text'>
+                              <i className='ni ni-user-83' />
+                            </span>
+                          </div>
+                          <input
+                            className='form-control'
+                            placeholder='Date Of Joining'
+                            type='date'
+                            name='date_of_joining'
+                            onChange={e => {
+                              this.handleFieldChange(e);
+                            }}
+                          />
+                        </div>
+                      </div>
+
                       <div className='text-center'>
                         <button
                           type='button'
@@ -95,78 +143,20 @@ class LoginComponent extends Component {
                           }}
                           className='btn btn-primary my-4'
                         >
-                          Sign in
+                          Add User
                         </button>
                       </div>
                     </form>
                   </div>
                 </div>
-                <div className='row mt-3'></div>
               </div>
             </div>
           </div>
         </div>
-        <footer className='py-5' id='footer-main'>
-          <div className='container'>
-            <div className='row align-items-center justify-content-xl-between'>
-              <div className='col-xl-6'>
-                <div className='copyright text-center text-xl-left text-muted'>
-                  &copy; 2020{' '}
-                  <a
-                    href='https://www.creative-tim.com'
-                    className='font-weight-bold ml-1'
-                    target='_blank'
-                  >
-                    Creative Tim
-                  </a>
-                </div>
-              </div>
-              <div className='col-xl-6'>
-                <ul className='nav nav-footer justify-content-center justify-content-xl-end'>
-                  <li className='nav-item'>
-                    <a
-                      href='https://www.creative-tim.com'
-                      className='nav-link'
-                      target='_blank'
-                    >
-                      Creative Tim
-                    </a>
-                  </li>
-                  <li className='nav-item'>
-                    <a
-                      href='https://www.creative-tim.com/presentation'
-                      className='nav-link'
-                      target='_blank'
-                    >
-                      About Us
-                    </a>
-                  </li>
-                  <li className='nav-item'>
-                    <a
-                      href='http://blog.creative-tim.com'
-                      className='nav-link'
-                      target='_blank'
-                    >
-                      Blog
-                    </a>
-                  </li>
-                  <li className='nav-item'>
-                    <a
-                      href='https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md'
-                      className='nav-link'
-                      target='_blank'
-                    >
-                      MIT License
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </footer>
+        <LoginFooter />
       </React.Fragment>
     );
   }
 }
 
-export default LoginComponent;
+export default SignupComponent;
