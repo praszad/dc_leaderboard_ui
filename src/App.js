@@ -9,6 +9,8 @@ import PublicRouter from './routers/PublicRouter';
 import NotFoundComponent from './Components/NotFound/NotFoundComponent';
 import ProfileComponent from './Components/Profile/ProfileComponent';
 import SignupComponent from './Components/Signup/SignupComponent';
+import CategoryManagementComponent from './Components/CategoryManagement/CategoryManagementComponent';
+import CategoryItemManagementComponent from './Components/CategoryItemManagement/CategoryItemManagementComponent';
 
 function App() {
   Authorization();
@@ -22,7 +24,17 @@ function App() {
         <PrivateRouter path='/employees' Component={DashBoardComponent} />
         <PrivateRouter path='/adduser' Component={SignupComponent} />
         <PrivateRouter path='/profile' Component={ProfileComponent} />
+        <PrivateRouter path='/editprofile' Component={ProfileComponent} />
 
+        <PrivateRouter
+          path='/category'
+          Component={CategoryManagementComponent}
+        />
+        <PrivateRouter
+          path='/categoryitem'
+          exact
+          Component={CategoryItemManagementComponent}
+        />
         <Route path='**' exact>
           <NotFoundComponent />
         </Route>

@@ -16,7 +16,7 @@ class EmployeesComponent extends Component {
     return (
       <React.Fragment>
         <div class='card-header border-0'>
-          <h3 class='mb-0'>Light table</h3>
+          <h3 class='mb-0'>User's</h3>
         </div>
 
         <div class='table-responsive'>
@@ -136,7 +136,7 @@ class EmployeesComponent extends Component {
                   {page}
                 </a>
               </li>
-              {totalCount >= page * pageSize ? (
+              {totalCount > page * pageSize ? (
                 <li class='page-item'>
                   <a
                     class='page-link'
