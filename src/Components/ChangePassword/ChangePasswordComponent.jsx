@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NavbarComponent from '../NavBar/NavbarComponent';
 import { AuthLogin } from '../../utility/actions';
 import toastr from '../../utility/Toaster';
-class LoginComponent extends Component {
+class ChangePasswordComponent extends Component {
   constructor(props) {
     super(props);
   }
@@ -169,4 +169,4 @@ class LoginComponent extends Component {
   }
 }
 
-export default LoginComponent;
+export default ChangePasswordComponent;
