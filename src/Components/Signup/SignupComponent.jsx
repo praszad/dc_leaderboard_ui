@@ -23,10 +23,8 @@ class SignupComponent extends Component {
       toastr.error('Please Fill All the Fields');
       return;
     }
-    console.log(userObject);
 
     let responseObject = await addNewEmployee(userObject);
-    console.log(responseObject);
     const { data, status } = responseObject;
 
     if (user_id === data?.emp_id && status === 200) {

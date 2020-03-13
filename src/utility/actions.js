@@ -52,7 +52,17 @@ export const getEmployees = async ({ user_id = '', page = 1 }) => {
     method: 'post',
     url: 'http://localhost:3636/api/v1/employee',
     headers: { Authorization: token },
-    data: { user_id, page }
+    data: { user_id, page, size: 2 }
+  };
+  return await requestCall(reqObject);
+};
+
+export const getAllUsers = async () => {
+  const token = getToken();
+  let reqObject = {
+    method: 'get',
+    url: 'http://localhost:3636/api/v1/employee',
+    headers: { Authorization: token }
   };
   return await requestCall(reqObject);
 };
@@ -88,15 +98,35 @@ export const getCategories = async () => {
   return await requestCall(reqObject);
 };
 
-export const addNewEmployee = async ({ ...userObject }) => {
-  console.log({ ...userObject });
+export const getCategoryItems = async categoryId => {
+  const token = getToken();
+  let reqObject = {
+    method: 'post',
+    url: 'http://localhost:3636/api/v1/category/getItems',
+    headers: { Authorization: token },
+    data: { categoryId }
+  };
+  return await requestCall(reqObject);
+};
 
+export const addNewEmployee = async ({ ...userObject }) => {
   const token = getToken();
   let reqObject = {
     method: 'post',
     url: 'http://localhost:3636/api/v1/employee/add',
     headers: { Authorization: token },
     data: { ...userObject, role_id: 'User' }
+  };
+  return await requestCall(reqObject);
+};
+
+export const addNewKarma = async ({ ...userObject }) => {
+  const token = getToken();
+  let reqObject = {
+    method: 'post',
+    url: 'http://localhost:3636/api/v1/transaction',
+    headers: { Authorization: token },
+    data: { ...userObject }
   };
   return await requestCall(reqObject);
 };

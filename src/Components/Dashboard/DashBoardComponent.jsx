@@ -27,7 +27,6 @@ class DashBoardComponent extends Component {
       Error
     } = response;
     const { totalCount } = data;
-    console.log(totalCount, data);
     if (status === 200) {
       this.setState({ employeeList: responseData, totalCount });
       if (data.Error === 'Invalid Token') {

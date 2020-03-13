@@ -14,7 +14,6 @@ class DashBoardNavBar extends Component {
   };
   componentDidMount() {
     const userData = getUserData();
-    console.log(userData);
 
     this.setState({ userData });
   }
