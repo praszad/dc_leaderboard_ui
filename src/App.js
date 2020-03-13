@@ -11,6 +11,7 @@ import ProfileComponent from './Components/Profile/ProfileComponent';
 import SignupComponent from './Components/Signup/SignupComponent';
 import CategoryManagementComponent from './Components/CategoryManagement/CategoryManagementComponent';
 import CategoryItemManagementComponent from './Components/CategoryItemManagement/CategoryItemManagementComponent';
+import KarmaTransactionComponent from './Components/KarmaTransaction/KarmaTransactionComponent';
 
 function App() {
   Authorization();
@@ -25,6 +26,7 @@ function App() {
         <PrivateRouter path='/adduser' Component={SignupComponent} />
         <PrivateRouter path='/profile' Component={ProfileComponent} />
         <PrivateRouter path='/editprofile' Component={ProfileComponent} />
+        <PrivateRouter path='/karma' Component={KarmaTransactionComponent} />
 
         <PrivateRouter
           path='/category'
