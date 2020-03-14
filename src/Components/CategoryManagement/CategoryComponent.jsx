@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import SideBarComponent from '../NavBar/SideBarComponent';
 import FooterComponent from '../NavBar/FooterComponent';
 import DashBoardNavBar from '../NavBar/DashBoardNavBar';
-import EmployeesGridComponent from './EmployeesGridComponent';
 import { getEmployees } from '../../utility/actions';
 import toastr from '../../utility/Toaster';
+import CategoryGridComponent from './CategoryGridComponent';
 
-class EmployeesComponent extends Component {
+class CategoryComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -60,7 +60,6 @@ class EmployeesComponent extends Component {
         <div class='main-content' id='panel'>
           <DashBoardNavBar
             history={this.props.history}
-            searchPlaceHolder='Employee ID'
             handleUserSearch={this.handleUserSearch}
           />
           <div class='header bg-primary pb-6'>
@@ -177,7 +176,7 @@ class EmployeesComponent extends Component {
             <div class='row'>
               <div class='col-xl-12'>
                 <div class='card'>
-                  <EmployeesGridComponent
+                  <CategoryGridComponent
                     employeeList={employeeList}
                     page={page}
                     handlePagination={this.handlePagination}
@@ -195,4 +194,4 @@ class EmployeesComponent extends Component {
   }
 }
 
-export default EmployeesComponent;
+export default CategoryComponent;
