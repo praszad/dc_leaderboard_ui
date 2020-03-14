@@ -2,33 +2,31 @@ import React, { Component } from 'react';
 import SideBarComponent from '../NavBar/SideBarComponent';
 import FooterComponent from '../NavBar/FooterComponent';
 import DashBoardNavBar from '../NavBar/DashBoardNavBar';
-import EmployeesComponent from '../Employees/EmployeesComponent';
-import { getEmployees } from '../../utility/actions';
+import { getLeaderBoard } from '../../utility/actions';
 import toastr from '../../utility/Toaster';
+import LeaderBoardComponent from '../LeaderBoard/LeaderBoardComponent';
 
 class DashBoardComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      employeeList: [],
-      pageSize: 2
+      leaderBoardData: []
     };
   }
   componentDidMount() {
-    this.getEmployeeData();
+    this.getLeaderBoardData();
   }
-  getEmployeeData = async (page = 1) => {
-    const { searchKey = '' } = this.state;
-    const response = await getEmployees({ user_id: searchKey, page });
-    const {
-      status = '',
-      data: { response: responseData },
-      data = {},
-      Error
-    } = response;
-    const { totalCount } = data;
+  getLeaderBoardData = async (user_id = '') => {
+    const response = await getLeaderBoard(user_id);
+    console.log(response);
+
+    const { status = '', data = {} } = response;
     if (status === 200) {
-      this.setState({ employeeList: responseData, totalCount });
+      this.setState({ leaderBoardData: data });
+      if (data.Error) {
+        toastr.error(data.Error);
+        return;
+      }
       if (data.Error === 'Invalid Token') {
         toastr.error('Token Expired');
         localStorage.removeItem('authDc');
@@ -36,31 +34,24 @@ class DashBoardComponent extends Component {
       }
     }
   };
-  handlePagination = page => {
-    this.setState({ page }, () => {
-      this.getEmployeeData(page);
-    });
-  };
+
   handleUserSearch = ({ searchKey }) => {
     this.setState({ searchKey }, () => {
-      this.getEmployeeData();
+      let user_id = searchKey;
+      this.getLeaderBoardData(user_id);
     });
   };
 
   render() {
-    const {
-      employeeList = [],
-      page,
-      totalCount = 0,
-      pageSize = 2
-    } = this.state;
+    const { leaderBoardData = [] } = this.state;
     return (
       <React.Fragment>
         <SideBarComponent history={this.props.history} />
         <div class='main-content' id='panel'>
           <DashBoardNavBar
-            history={this.props.history}
             handleUserSearch={this.handleUserSearch}
+            searchPlaceHolder='Employee ID'
+            history={this.props.history}
           />
           <div class='header bg-primary pb-6'>
             <div class='container-fluid'>
@@ -176,13 +167,7 @@ class DashBoardComponent extends Component {
             <div class='row'>
               <div class='col-xl-12'>
                 <div class='card'>
-                  <EmployeesComponent
-                    employeeList={employeeList}
-                    page={page}
-                    handlePagination={this.handlePagination}
-                    totalCount={totalCount}
-                    pageSize={pageSize}
-                  />
+                  <LeaderBoardComponent leaderBoardData={leaderBoardData} />
                 </div>
               </div>
             </div>

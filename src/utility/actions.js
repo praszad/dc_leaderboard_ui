@@ -124,9 +124,48 @@ export const addNewKarma = async ({ ...userObject }) => {
   const token = getToken();
   let reqObject = {
     method: 'post',
-    url: 'http://localhost:3636/api/v1/transaction',
+    url: 'http://localhost:3636/api/v1/transaction/add',
     headers: { Authorization: token },
     data: { ...userObject }
   };
   return await requestCall(reqObject);
+};
+export const changePassword = async ({ ...userObject }) => {
+  const token = getToken();
+  let reqObject = {
+    method: 'post',
+    url: 'http://localhost:3636/api/v1/employee/change_password',
+    headers: { Authorization: token },
+    data: { ...userObject }
+  };
+  return await requestCall(reqObject);
+};
+
+export const getLeaderBoard = async (user_id = '') => {
+  const token = getToken();
+  let reqObject = {
+    method: 'post',
+    url: 'http://localhost:3636/api/v1/transaction',
+    headers: { Authorization: token },
+    data: { user_id }
+  };
+  return await requestCall(reqObject);
+};
+
+export const getUserTransaction = async (user_id = '') => {
+  const token = getToken();
+  let reqObject = {
+    method: 'post',
+    url: 'http://localhost:3636/api/v1/transaction/user',
+    headers: { Authorization: token },
+    data: { user_id }
+  };
+  return await requestCall(reqObject);
+};
+
+export const getLocalUserData = () => {
+  let lsUserData = localStorage.getItem('authDc');
+  lsUserData = JSON.parse(lsUserData);
+
+  return lsUserData.userData;
 };

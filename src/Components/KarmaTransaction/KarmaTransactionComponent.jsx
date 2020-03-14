@@ -85,7 +85,7 @@ class KarmaTransactionComponent extends Component {
         this.props.history.push('/');
         return;
       }
-      toastr.success('Category Item Added Successfully');
+      toastr.success('Karma Transaction Added Successfully');
       this.props.history.push('/');
     }
   };
@@ -160,7 +160,6 @@ class KarmaTransactionComponent extends Component {
   render() {
     const {
       userOptions = [],
-      karmaDateTime = '',
       categoryOptions = [],
       itemOptions = [],
       selectedItem = {},
@@ -199,6 +198,7 @@ class KarmaTransactionComponent extends Component {
                               </label>
                               <Select
                                 value={selectedUser}
+                                placeholder='Select User'
                                 onChange={this.handleChange}
                                 options={userOptions}
                               />
