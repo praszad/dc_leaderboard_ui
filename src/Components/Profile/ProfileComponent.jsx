@@ -4,6 +4,7 @@ import NavbarComponent from '../NavBar/NavbarComponent';
 import SideBarComponent from '../NavBar/SideBarComponent';
 import DashBoardNavBar from '../NavBar/DashBoardNavBar';
 import { getUserData } from '../../utility/actions';
+import { Link } from 'react-router-dom';
 
 class ProfileComponent extends Component {
   constructor(props) {
@@ -83,6 +84,12 @@ class ProfileComponent extends Component {
                         <i class='ni business_briefcase-24 mr-2'></i>
                         Date Of Join : {date_of_joining}
                       </div>
+                      <Link to='changepassword'>
+                        <div class='h5 mt-4'>
+                          <i class='ni business_briefcase-24 mr-2'></i>
+                          <u>Change Password </u>
+                        </div>
+                      </Link>
                     </div>
                   </div>
                 </div>

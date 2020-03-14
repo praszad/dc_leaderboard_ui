@@ -3,6 +3,7 @@ import SideBarComponent from '../NavBar/SideBarComponent';
 import DashBoardNavBar from '../NavBar/DashBoardNavBar';
 import { getCategories, addCategoryItem } from '../../utility/actions';
 import toastr from '../../utility/Toaster';
+import Select from 'react-select';
 
 class CategoryItemManagementComponent extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class CategoryItemManagementComponent extends Component {
   componentDidMount() {
     this.getAllCategories();
   }
-  getAllCategories = async (page = 1) => {
+  getAllCategories = async () => {
     const response = await getCategories();
     const { status = '', data = {} } = response;
     if (data.Error) {
@@ -24,19 +25,23 @@ class CategoryItemManagementComponent extends Component {
       return;
     }
     if (data.length && status === 200) {
-      this.setState({ categoryOptions: response.data });
+      let categoryOptions = response.data.map(category => {
+        return { value: category.categoryId, label: category.categoryName };
+      });
+
+      this.setState({ categoryOptions });
     }
   };
   saveCategoryItem = async () => {
     const {
-      categoryId = '',
       itemName = '',
       karmaPoints = 0,
-      itemDescription = ''
+      itemDescription = '',
+      selectedCategory = {}
     } = this.state;
 
     const response = await addCategoryItem({
-      categoryId,
+      categoryId: selectedCategory.value,
       itemName,
       karmaPoints,
       itemDescription
@@ -45,12 +50,15 @@ class CategoryItemManagementComponent extends Component {
     const {
       status = '',
       data = {},
-      data: { Error: error }
+      data: { Error: error, errors }
     } = response;
-    console.log(response, data);
     if (status === 200) {
       if (error) {
         toastr.error(error);
+        return;
+      }
+      if (errors) {
+        toastr.error(response.data.message);
         return;
       }
       if (error === 'Invalid Token') {
@@ -71,14 +79,17 @@ class CategoryItemManagementComponent extends Component {
   handleFieldChanges = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-
+  handleChange = selectedCategory => {
+    this.setState({ selectedCategory });
+  };
   render() {
     const {
       categoryOptions = [],
       categoryId = '',
       itemDescription = '',
       itemName = '',
-      karmaPoints = 0
+      karmaPoints = 0,
+      selectedCategory = {}
     } = this.state;
 
     return (
@@ -110,28 +121,11 @@ class CategoryItemManagementComponent extends Component {
                               >
                                 Select Category
                               </label>
-                              <select
-                                id='input-address'
-                                name='categoryId'
-                                onChange={e => {
-                                  this.handleFieldChanges(e);
-                                }}
-                                class='form-control'
-                                value={categoryId}
-                                type='text'
-                              >
-                                <option value='' disabled>
-                                  {'Select Category'}
-                                </option>
-                                {categoryOptions.length &&
-                                  categoryOptions.map(category => {
-                                    return (
-                                      <option value={category.categoryId}>
-                                        {category.categoryName}
-                                      </option>
-                                    );
-                                  })}
-                              </select>
+                              <Select
+                                value={selectedCategory}
+                                onChange={this.handleChange}
+                                options={categoryOptions}
+                              />
                             </div>
                           </div>
                           <div class='col-md-12'>

@@ -14,7 +14,6 @@ class DashBoardNavBar extends Component {
   };
   componentDidMount() {
     const userData = getUserData();
-    console.log(userData);
 
     this.setState({ userData });
   }
@@ -29,7 +28,7 @@ class DashBoardNavBar extends Component {
     const {
       userData: { emp_name = '', karmaPoints = '' }
     } = this.state;
-    const { handleUserSearch = '' } = this.props;
+    const { handleUserSearch = '', searchPlaceHolder = '' } = this.props;
     return (
       <nav class='navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom'>
         <div class='container-fluid'>
@@ -48,7 +47,9 @@ class DashBoardNavBar extends Component {
                     </div>
                     <input
                       class='form-control'
-                      placeholder='Search'
+                      placeholder={
+                        searchPlaceHolder ? searchPlaceHolder : 'Search'
+                      }
                       name='searchKey'
                       onChange={e => this.handleUserSearch(e)}
                       type='text'
@@ -163,10 +164,12 @@ class DashBoardNavBar extends Component {
                       <span>Transactions</span>
                     </a>
                   </Link>
-                  <a href='javascript:void(0)' class='dropdown-item'>
-                    <i class='ni ni-support-16'></i>
-                    <span>Support</span>
-                  </a>
+                  <Link to='/changepassword'>
+                    <a href='javascript:void(0)' class='dropdown-item'>
+                      <i class='ni ni-support-16'></i>
+                      <span>Change Password</span>
+                    </a>
+                  </Link>
                   <div class='dropdown-divider'></div>
                   <a
                     href='javascript:void(0)'

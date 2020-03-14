@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { getLocalUserData } from '../../utility/actions';
 
 class SideBarComponent extends Component {
   constructor(props) {
@@ -9,11 +10,7 @@ class SideBarComponent extends Component {
     this.props.history.push(page);
   };
   componentDidMount() {
-    let lsUserData = localStorage.getItem('authDc');
-    lsUserData = JSON.parse(lsUserData);
-    let {
-      userData: { emp_name, role_id }
-    } = lsUserData;
+    let { emp_name, role_id } = getLocalUserData();
     this.setState({ userName: emp_name, role_id });
   }
   render() {
@@ -55,18 +52,29 @@ class SideBarComponent extends Component {
                       <span class='nav-link-text'>Dashboard</span>
                     </a>
                   </li>
-
+                  <li class='nav-item'>
+                    <a
+                      class='nav-link'
+                      href='javascript:void(0)'
+                      onClick={() => {
+                        this.redirectPage('/employees');
+                      }}
+                    >
+                      <i class='ni ni-circle-08 text-pink'></i>
+                      <span class='nav-link-text'>Users</span>
+                    </a>
+                  </li>
                   {role_id == 36 ? (
                     <li class='nav-item'>
                       <a
                         class='nav-link'
                         href='javascript:void(0)'
                         onClick={() => {
-                          this.redirectPage('/adduser');
+                          this.redirectPage('/categories');
                         }}
                       >
                         <i class='ni ni-circle-08 text-pink'></i>
-                        <span class='nav-link-text'>Create User</span>
+                        <span class='nav-link-text'>Categories</span>
                       </a>
                     </li>
                   ) : null}
@@ -108,18 +116,6 @@ class SideBarComponent extends Component {
                     >
                       <i class='ni ni-single-02 text-yellow'></i>
                       <span class='nav-link-text'>Profile</span>
-                    </a>
-                  </li>
-                  <li class='nav-item'>
-                    <a
-                      class='nav-link'
-                      href='javascript:void(0)'
-                      onClick={() => {
-                        this.redirectPage('/employees');
-                      }}
-                    >
-                      <i class='ni ni-bullet-list-67 text-default'></i>
-                      <span class='nav-link-text'>Employees</span>
                     </a>
                   </li>
                 </ul>

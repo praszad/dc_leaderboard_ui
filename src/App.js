@@ -1,5 +1,11 @@
 import React from 'react';
-import { Router, Switch, Redirect, Link, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Redirect,
+  Link,
+  Route
+} from 'react-router-dom';
 import history from '../src/utility/history';
 import DashBoardComponent from './Components/Dashboard/DashBoardComponent';
 import LoginComponent from './Components/Login/LoginComponent';
@@ -11,6 +17,11 @@ import ProfileComponent from './Components/Profile/ProfileComponent';
 import SignupComponent from './Components/Signup/SignupComponent';
 import CategoryManagementComponent from './Components/CategoryManagement/CategoryManagementComponent';
 import CategoryItemManagementComponent from './Components/CategoryItemManagement/CategoryItemManagementComponent';
+import KarmaTransactionComponent from './Components/KarmaTransaction/KarmaTransactionComponent';
+import EmployeesComponent from './Components/Employees/EmployeesComponent';
+import CategoryComponent from './Components/CategoryManagement/CategoryComponent';
+import ChangePasswordComponent from './Components/ChangePassword/ChangePasswordComponent';
+import TransactionsComponent from './Components/Transactions/TransactionsComponent';
 
 function App() {
   Authorization();
@@ -21,11 +32,23 @@ function App() {
         <PublicRouter path='/' exact Component={LoginComponent} />
         <PublicRouter path='/login' Component={LoginComponent} />
         <PrivateRouter path='/dashboard' Component={DashBoardComponent} />
-        <PrivateRouter path='/employees' Component={DashBoardComponent} />
+        <PrivateRouter path='/employees' Component={EmployeesComponent} />
         <PrivateRouter path='/adduser' Component={SignupComponent} />
         <PrivateRouter path='/profile' Component={ProfileComponent} />
         <PrivateRouter path='/editprofile' Component={ProfileComponent} />
+        <PrivateRouter path='/karma' Component={KarmaTransactionComponent} />
+        <PrivateRouter
+          exact={true}
+          path='/transactions/:user_id'
+          Component={TransactionsComponent}
+        />
 
+        <PrivateRouter
+          path='/changepassword'
+          Component={ChangePasswordComponent}
+        />
+
+        <PrivateRouter path='/categories' Component={CategoryComponent} />
         <PrivateRouter
           path='/category'
           Component={CategoryManagementComponent}
