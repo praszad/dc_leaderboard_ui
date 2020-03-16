@@ -61,27 +61,15 @@ class LeaderBoardComponent extends Component {
                             </a>
                             <div class='media-body'>
                               <span class='name mb-0 text-sm'>
-                                {leader.emp_id}
+                                <Link to={`/transactions/${leader.emp_id}`}>
+                                  {' '}
+                                  {leader.emp_id}{' '}
+                                </Link>
                               </span>
                             </div>
                           </div>
                         </th>
                         <td class='budget'>{leader.karmaPoints}</td>
-                        {/* <td class='budget'>{employee.mobile}</td> */}
-                        {/* <td>
-                          <span class='badge badge-dot mr-4'>
-                            <i class='bg-warning'></i>
-                            <span class='status'>
-                              {' '}
-                              {employee.role_id == 36 ? 'Admin' : 'User'}
-                            </span>
-                          </span>
-                        </td>
-                        <td>
-                          <div class='d-flex align-items-center'>
-                            <td class='budget'>{employee.date_of_joining}</td>
-                          </div>
-                        </td> */}
                         <td class='text-right'>
                           <div class='dropdown'>
                             <a
@@ -95,15 +83,14 @@ class LeaderBoardComponent extends Component {
                               <i class='fas fa-ellipsis-v'></i>
                             </a>
                             <div class='dropdown-menu dropdown-menu-right dropdown-menu-arrow'>
-                              <a class='dropdown-item' href='#'>
-                                Action
-                              </a>
-                              <a class='dropdown-item' href='#'>
-                                Another action
-                              </a>
-                              <a class='dropdown-item' href='#'>
-                                Something else here
-                              </a>
+                              <Link to={`/transactions/${leader.emp_id}`}>
+                                <a
+                                  class='dropdown-item'
+                                  href='javascript:void(0)'
+                                >
+                                  Show Transaction
+                                </a>
+                              </Link>
                             </div>
                           </div>
                         </td>

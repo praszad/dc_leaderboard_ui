@@ -13,20 +13,10 @@ class TransactionsGridComponent extends Component {
   }
   render() {
     const { leaderBoardData = [] } = this.props;
-    const { role_id } = this.state;
     return (
       <React.Fragment>
         <div class='card-header border-0'>
-          {role_id == '36' ? (
-            <Link to='karma'>
-              {' '}
-              <h3 class='mb-0'>
-                <b>+</b> Add Points | Leader Board
-              </h3>
-            </Link>
-          ) : (
-            <h3 class='mb-0'>Leader Board</h3>
-          )}
+          <h3 class='mb-0'>Transaction Board</h3>
         </div>
 
         <div class='table-responsive'>
@@ -39,8 +29,15 @@ class TransactionsGridComponent extends Component {
                 <th scope='col' class='sort' data-sort='budget'>
                   Karma Points
                 </th>
-
-                <th scope='col'></th>
+                <th scope='col' class='sort' data-sort='budget'>
+                  Transaction By
+                </th>
+                <th scope='col' class='sort' data-sort='budget'>
+                  Transaction On
+                </th>
+                <th scope='col' class='sort' data-sort='budget'>
+                  Transaction Id
+                </th>
               </tr>
             </thead>
             <tbody class='list'>
@@ -53,12 +50,7 @@ class TransactionsGridComponent extends Component {
                             <a
                               href='javascript:void(0)'
                               class='avatar rounded-circle mr-3'
-                            >
-                              <img
-                                alt='Image placeholder'
-                                src='../assets/img/theme/bootstrap.jpg'
-                              />
-                            </a>
+                            ></a>
                             <div class='media-body'>
                               <span class='name mb-0 text-sm'>
                                 {leader.emp_id}
@@ -67,7 +59,14 @@ class TransactionsGridComponent extends Component {
                           </div>
                         </th>
                         <td class='budget'>{leader.karmaPoints}</td>
-                        {/* <td class='budget'>{employee.mobile}</td> */}
+                        <td class='budget'>{leader.createdBy}</td>
+                        <td>
+                          <div class='d-flex align-items-center'>
+                            <td class='budget'>{leader.createdAt}</td>
+                          </div>
+                        </td>
+                        <td class='budget'>{leader.TR_id}</td>
+
                         {/* <td>
                           <span class='badge badge-dot mr-4'>
                             <i class='bg-warning'></i>
@@ -82,31 +81,6 @@ class TransactionsGridComponent extends Component {
                             <td class='budget'>{employee.date_of_joining}</td>
                           </div>
                         </td> */}
-                        <td class='text-right'>
-                          <div class='dropdown'>
-                            <a
-                              class='btn btn-sm btn-icon-only text-dark'
-                              href='#'
-                              role='button'
-                              data-toggle='dropdown'
-                              aria-haspopup='true'
-                              aria-expanded='false'
-                            >
-                              <i class='fas fa-ellipsis-v'></i>
-                            </a>
-                            <div class='dropdown-menu dropdown-menu-right dropdown-menu-arrow'>
-                              <a class='dropdown-item' href='#'>
-                                Action
-                              </a>
-                              <a class='dropdown-item' href='#'>
-                                Another action
-                              </a>
-                              <a class='dropdown-item' href='#'>
-                                Something else here
-                              </a>
-                            </div>
-                          </div>
-                        </td>
                       </tr>
                     );
                   })
