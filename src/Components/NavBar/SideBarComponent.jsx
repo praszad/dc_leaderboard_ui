@@ -64,7 +64,7 @@ class SideBarComponent extends Component {
                       <span class='nav-link-text'>Users</span>
                     </a>
                   </li>
-                  {role_id == 36 ? (
+                  {/* {role_id == 36 ? (
                     <li class='nav-item'>
                       <a
                         class='nav-link'
@@ -77,7 +77,7 @@ class SideBarComponent extends Component {
                         <span class='nav-link-text'>Categories</span>
                       </a>
                     </li>
-                  ) : null}
+                  ) : null} */}
                   {role_id == 36 ? (
                     <li class='nav-item'>
                       <a
